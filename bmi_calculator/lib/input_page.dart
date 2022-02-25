@@ -1,6 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'icon_content.dart';
+import 'neuomorph_card.dart';
+
+const bottomBarHeight = 60.0;
+const bottomBarColor = Colors.lightBlue;
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,7 +21,13 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       backgroundColor: Color(0xfff4f3f8),
       appBar: AppBar(
-        title: Text('BMI Calculator'),
+        title: Center(
+          child: Text(
+            'BMI Calculator',
+            style: TextStyle(color: Colors.grey.shade700, fontFamily: 'Amenable'),
+          ),
+        ),
+        backgroundColor: Colors.grey[300],
       ),
       body: Column(
         children: <Widget>[
@@ -23,95 +35,42 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: NeumorphSlate(),
+                  child: NeumorphCard(
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.marsStroke,
+                      label: 'Male',
+                    ),
+                  ),
                 ),
-                Expanded(child: NeumorphSlate()),
+                Expanded(
+                    child: NeumorphCard(
+                  cardChild: IconContent(
+                    icon: FontAwesomeIcons.venus,
+                    label: 'Female',
+                  ),
+                )),
               ],
             ),
           ),
-          Expanded(child: NeumorphSlate()),
+          Expanded(child: NeumorphCard()),
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: NeumorphSlate()),
-                Expanded(child: NeumorphSlate()),
+                Expanded(child: NeumorphCard()),
+                Expanded(child: NeumorphCard()),
               ],
             ),
           ),
+          Container(
+            color: bottomBarColor,
+            margin: EdgeInsets.only(top: 10.0),
+            height: bottomBarHeight,
+          )
         ],
       ),
     );
   }
 }
 
-class NeumorphSlate extends StatelessWidget {
-  const NeumorphSlate({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10),
-        // ignore: prefer_const_literals_to_create_immutables
-        boxShadow: [
-        BoxShadow(
-          color: (Colors.grey[500])!,
-          offset: Offset(4, 4),
-          blurRadius: 15,
-          spreadRadius: 1,
-        ),
-        BoxShadow(
-          color: Colors.white,
-          offset: Offset(-4, -4),
-          blurRadius: 15,
-          spreadRadius: 1,
-        ),
-      ]
-      ),
-    );
-  }
-}
 
-// body: GestureDetector(
-//           onTapDown: (_) {
-//             setState(() {
-//               _isElevated = !_isElevated;
-//             });
-//           },
-//           onTapUp: (_) {
-//             setState(() {
-//               _isElevated = !_isElevated;
-//             });
-//           },
-//           child: AnimatedContainer(
-//             duration: const Duration(
-//               milliseconds: 100,
-//             ),
-//             height: 200,
-//             width: 170,
-//             decoration: BoxDecoration(
-//               color: Colors.grey[300],
-//               borderRadius: BorderRadius.circular(10),
-//               boxShadow: _isElevated
-//                   ? [
-//                       const BoxShadow(
-//                         color: Colors.grey,
-//                         offset: Offset(4, 4),
-//                         blurRadius: 15,
-//                         spreadRadius: 1,
-//                       ),
-//                       const BoxShadow(
-//                         color: Colors.white,
-//                         offset: Offset(-4, -4),
-//                         blurRadius: 15,
-//                         spreadRadius: 1,
-//                       ),
-//                     ]
-//                   : null,
-//             ),
-//           ),
-//         ),
