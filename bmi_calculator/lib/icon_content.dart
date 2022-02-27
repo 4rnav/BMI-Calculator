@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class IconContent extends StatelessWidget {
-  IconContent({required this.icon, required this.label});
+  IconContent({required this.icon, required this.label, required this.iconColor});
 
   final IconData icon;
   final String label;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +17,14 @@ class IconContent extends StatelessWidget {
         Icon(
           icon,
           size: 80.0,
-          color: Color(0XFFff922b),
+          color: iconColor,
         ),
         SizedBox(
           height: 10.0,
         ),
         Text(
           label,
-          style: GoogleFonts.getFont('Poppins', fontWeight: FontWeight.bold, color: Colors.grey)
+          style: GoogleFonts.getFont('Poppins', fontWeight: FontWeight.bold, color: Color.fromARGB(255, 133, 133, 133), fontSize: 20.0)
         ),
       ],
     );

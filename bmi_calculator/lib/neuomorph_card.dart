@@ -7,9 +7,10 @@ class NeumorphCard extends StatelessWidget {
   //   Key? key,
   // }) : super(key: key);
   // ignore: prefer_const_constructors_in_immutables
-  NeumorphCard({this.cardChild});
+  NeumorphCard({this.cardChild, this.cardColor});
 
   final Widget? cardChild;
+  Color? cardColor =  Color(0xFFEEEEEE);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class NeumorphCard extends StatelessWidget {
       child: cardChild,
       margin: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: cardColor,
           borderRadius: BorderRadius.circular(20),
           // ignore: prefer_const_literals_to_create_immutables
           boxShadow: [

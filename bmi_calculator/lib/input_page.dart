@@ -7,6 +7,8 @@ import 'neuomorph_card.dart';
 
 const bottomBarHeight = 60.0;
 const bottomBarColor = Colors.lightBlue;
+Color maleCardColor = Color(0xFFEEEEEE);
+Color femaleCardColor = Color(0xFFEEEEEE);
 
 class InputPage extends StatefulWidget {
   @override
@@ -16,6 +18,28 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   bool _isElevated = false;
 
+  static const activeColour = Color.fromARGB(255, 221, 221, 221);
+  static const inactiveColour = Color(0xFFEEEEEE);
+
+  //1 = male, 0 = female
+  void updateColour(int gender) {
+    if (gender == 1) {
+      if (maleCardColor == inactiveColour) {
+        maleCardColor = activeColour;
+        femaleCardColor = inactiveColour;
+      } else {
+        maleCardColor = inactiveColour;
+      }
+    } else {
+      if (femaleCardColor == inactiveColour) {
+        femaleCardColor = activeColour;
+        maleCardColor = inactiveColour;
+      } else {
+        femaleCardColor = inactiveColour;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +48,8 @@ class _InputPageState extends State<InputPage> {
         title: Center(
           child: Text(
             'BMI Calculator',
-            style: TextStyle(color: Colors.grey.shade700, fontFamily: 'Amenable'),
+            style:
+                TextStyle(color: Colors.grey.shade700, fontFamily: 'Poppins'),
           ),
         ),
         backgroundColor: Colors.grey[300],
@@ -35,20 +60,39 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: NeumorphCard(
-                    cardChild: IconContent(
-                      icon: FontAwesomeIcons.marsStroke,
-                      label: 'Male',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        updateColour(1);
+                      });
+                    },
+                    child: NeumorphCard(
+                      cardColor: maleCardColor,
+                      cardChild: IconContent(
+                        icon: FontAwesomeIcons.marsStroke,
+                        label: 'Male',
+                        iconColor: Colors.blueAccent,
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                        setState(() {
+                          updateColour(0);
+                        });
+                    },
                     child: NeumorphCard(
-                  cardChild: IconContent(
-                    icon: FontAwesomeIcons.venus,
-                    label: 'Female',
+                      cardColor: femaleCardColor,
+                      cardChild: IconContent(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'Female',
+                        iconColor: Colors.pink,
+                      ),
+                    ),
                   ),
-                )),
+                ),
               ],
             ),
           ),
@@ -71,6 +115,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
-
