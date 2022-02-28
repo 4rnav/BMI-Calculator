@@ -7,8 +7,10 @@ import 'neuomorph_card.dart';
 
 const bottomBarHeight = 60.0;
 const bottomBarColor = Colors.lightBlue;
-Color maleCardColor = Color(0xFFEEEEEE);
-Color femaleCardColor = Color(0xFFEEEEEE);
+// Color maleCardColor = Color(0xFFEEEEEE);
+// Color femaleCardColor = Color(0xFFEEEEEE);
+
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -16,29 +18,12 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  bool _isElevated = false;
+  //bool _isElevated = false;
 
-  static const activeColour = Color.fromARGB(255, 221, 221, 221);
+  static const activeColour = Color.fromARGB(255, 209, 209, 209);
   static const inactiveColour = Color(0xFFEEEEEE);
 
-  //1 = male, 0 = female
-  void updateColour(int gender) {
-    if (gender == 1) {
-      if (maleCardColor == inactiveColour) {
-        maleCardColor = activeColour;
-        femaleCardColor = inactiveColour;
-      } else {
-        maleCardColor = inactiveColour;
-      }
-    } else {
-      if (femaleCardColor == inactiveColour) {
-        femaleCardColor = activeColour;
-        maleCardColor = inactiveColour;
-      } else {
-        femaleCardColor = inactiveColour;
-      }
-    }
-  }
+  Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -60,36 +45,36 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: NeumorphCard(
+                    onPress: () {
                       setState(() {
-                        updateColour(1);
+                        selectedGender = Gender.male;
                       });
                     },
-                    child: NeumorphCard(
-                      cardColor: maleCardColor,
-                      cardChild: IconContent(
-                        icon: FontAwesomeIcons.marsStroke,
-                        label: 'Male',
-                        iconColor: Colors.blueAccent,
-                      ),
+                    cardColor: selectedGender == Gender.male
+                        ? activeColour
+                        : inactiveColour,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.male,
+                      label: 'Male',
+                      iconColor: Colors.blueAccent,
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                        setState(() {
-                          updateColour(0);
-                        });
+                  child: NeumorphCard(
+                    onPress: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
                     },
-                    child: NeumorphCard(
-                      cardColor: femaleCardColor,
-                      cardChild: IconContent(
-                        icon: FontAwesomeIcons.venus,
-                        label: 'Female',
-                        iconColor: Colors.pink,
-                      ),
+                    cardColor: selectedGender == Gender.female
+                        ? activeColour
+                        : inactiveColour,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.female,
+                      label: 'Female',
+                      iconColor: Colors.pink,
                     ),
                   ),
                 ),

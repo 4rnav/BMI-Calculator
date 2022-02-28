@@ -24,7 +24,7 @@ class IconContent extends StatelessWidget {
         ),
         Text(
           label,
-          style: GoogleFonts.getFont('Poppins', fontWeight: FontWeight.bold, color: Color.fromARGB(255, 133, 133, 133), fontSize: 20.0)
+          style: GoogleFonts.getFont('Poppins', fontWeight: FontWeight.bold, color: Color.fromARGB(255, 39, 39, 39), fontSize: 20.0)
         ),
       ],
     );

@@ -7,34 +7,39 @@ class NeumorphCard extends StatelessWidget {
   //   Key? key,
   // }) : super(key: key);
   // ignore: prefer_const_constructors_in_immutables
-  NeumorphCard({this.cardChild, this.cardColor});
+  NeumorphCard({this.cardChild, this.cardColor, this.onPress});
 
+  final void Function()? onPress;
   final Widget? cardChild;
-  Color? cardColor =  Color(0xFFEEEEEE);
+  Color? cardColor = Color(0xFFEEEEEE);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: cardChild,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-          color: cardColor,
-          borderRadius: BorderRadius.circular(20),
-          // ignore: prefer_const_literals_to_create_immutables
-          boxShadow: [
-            BoxShadow(
-              color: (Colors.grey[500])!,
-              offset: Offset(4, 4),
-              blurRadius: 15,
-              spreadRadius: 1,
-            ),
-            BoxShadow(
-              color: Colors.white,
-              offset: Offset(-4, -4),
-              blurRadius: 15,
-              spreadRadius: 1,
-            ),
-          ]),
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        child: cardChild,
+        margin: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(25.0),
+        decoration: BoxDecoration(
+            color: cardColor,
+            borderRadius: BorderRadius.circular(20),
+            // ignore: prefer_const_literals_to_create_immutables
+            boxShadow: [
+              BoxShadow(
+                color: (Colors.grey[500])!,
+                offset: Offset(4, 4),
+                blurRadius: 15,
+                spreadRadius: 1,
+              ),
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(-4, -4),
+                blurRadius: 15,
+                spreadRadius: 1,
+              ),
+            ]),
+      ),
     );
   }
 }
