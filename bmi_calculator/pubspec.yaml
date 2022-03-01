@@ -79,6 +79,11 @@ flutter:
     - family: Amenable
       fonts:
         - asset: fonts/Amenable-PersonalUse.otf
+    - family: Poppins
+      fonts:
+        
+        - asset: fonts/Poppins-Bold.ttf
+          
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

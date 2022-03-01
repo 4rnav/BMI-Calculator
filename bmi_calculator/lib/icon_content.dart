@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'constants.dart';
 
 class IconContent extends StatelessWidget {
   IconContent({required this.icon, required this.label, required this.iconColor});
@@ -24,7 +25,7 @@ class IconContent extends StatelessWidget {
         ),
         Text(
           label,
-          style: GoogleFonts.getFont('Poppins', fontWeight: FontWeight.bold, color: Color.fromARGB(255, 39, 39, 39), fontSize: 20.0)
+          style: kLabelTextStyle
         ),
       ],
     );

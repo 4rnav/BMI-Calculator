@@ -20,7 +20,7 @@ class NeumorphCard extends StatelessWidget {
       child: Container(
         child: cardChild,
         margin: EdgeInsets.all(15.0),
-        padding: EdgeInsets.all(25.0),
+        padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
             color: cardColor,
             borderRadius: BorderRadius.circular(20),

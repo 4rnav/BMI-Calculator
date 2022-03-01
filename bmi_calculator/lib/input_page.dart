@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'neuomorph_card.dart';
+import 'constants.dart';
 
-const bottomBarHeight = 60.0;
-const bottomBarColor = Colors.lightBlue;
 // Color maleCardColor = Color(0xFFEEEEEE);
 // Color femaleCardColor = Color(0xFFEEEEEE);
 
@@ -24,6 +23,7 @@ class _InputPageState extends State<InputPage> {
   static const inactiveColour = Color(0xFFEEEEEE);
 
   Gender? selectedGender;
+  int heightInput = kMinHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,10 @@ class _InputPageState extends State<InputPage> {
         title: Center(
           child: Text(
             'BMI Calculator',
-            style:
-                TextStyle(color: Colors.grey.shade700, fontFamily: 'Poppins'),
+            style: TextStyle(
+                color: Colors.blueGrey.shade700,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
           ),
         ),
         backgroundColor: Colors.grey[300],
@@ -81,7 +83,45 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Expanded(child: NeumorphCard()),
+          Expanded(
+              child: NeumorphCard(
+            cardChild: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Height',
+                  style: kLabelTextStyle,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      heightInput.toString(),
+                      style: kNumberTextStyle,
+                    ),
+                    Text(
+                      ' cm',
+                      style: kLabelTextStyle,
+                    )
+                  ],
+                ),
+                Slider(
+                    value: heightInput.toDouble(),
+                    max: kMaxHeight.toDouble(),
+                    min: kMinHeight.toDouble(),
+                    inactiveColor: Colors.grey.shade300,
+                    activeColor: Colors.yellow.shade700,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        heightInput = newValue.toInt();
+                      });
+                    }),
+              ],
+            ),
+            cardColor: inactiveColour,
+          )),
           Expanded(
             child: Row(
               children: <Widget>[
