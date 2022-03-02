@@ -24,7 +24,8 @@ class _InputPageState extends State<InputPage> {
 
   Gender? selectedGender;
   int heightInput = kMinHeight;
-
+  int inputWeight = 30;
+  int inputAge = 10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,17 +108,26 @@ class _InputPageState extends State<InputPage> {
                     )
                   ],
                 ),
-                Slider(
-                    value: heightInput.toDouble(),
-                    max: kMaxHeight.toDouble(),
-                    min: kMinHeight.toDouble(),
-                    inactiveColor: Colors.grey.shade300,
-                    activeColor: Colors.yellow.shade700,
-                    onChanged: (double newValue) {
-                      setState(() {
-                        heightInput = newValue.toInt();
-                      });
-                    }),
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                      inactiveTrackColor: Colors.grey.shade300,
+                      activeTrackColor: Colors.yellow.shade600,
+                      thumbColor: Colors.yellow,
+                      overlayColor: Color(0x29FBC02D),
+                      overlayShape:
+                          RoundSliderOverlayShape(overlayRadius: 25.0)),
+                  child: Slider(
+                      value: heightInput.toDouble(),
+                      max: kMaxHeight.toDouble(),
+                      min: kMinHeight.toDouble(),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          heightInput = newValue.toInt();
+                        });
+                      }),
+                ),
               ],
             ),
             cardColor: inactiveColour,
@@ -125,8 +135,86 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: NeumorphCard()),
-                Expanded(child: NeumorphCard()),
+                Expanded(
+                  child: NeumorphCard(
+                    cardColor: inactiveColour,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Weight',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          inputWeight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    inputWeight--;
+                                  });
+                                }),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  inputWeight++;
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(child: NeumorphCard(
+                  cardColor: inactiveColour,
+                  cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Age',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          inputAge.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    inputAge--;
+                                  });
+                                }),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  inputAge++;
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                )),
               ],
             ),
           ),
@@ -137,6 +225,27 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({required this.icon, required this.onPressed});
+
+  final IconData icon;
+  final void Function() onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      elevation: 6.0,
+      onPressed: onPressed,
+      constraints: BoxConstraints.tightFor(
+        width: 50.0,
+        height: 50.0,
+      ),
+      shape: CircleBorder(),
+      fillColor: Colors.grey.shade200,
     );
   }
 }

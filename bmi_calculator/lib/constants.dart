@@ -5,6 +5,7 @@ const bottomBarColor = Colors.lightBlue;
 const int kMaxHeight = 220;
 const int kMinHeight = 100;
 
+
 const TextStyle kNumberTextStyle = TextStyle(
     fontSize: 35.0,
     fontWeight: FontWeight.w900,
