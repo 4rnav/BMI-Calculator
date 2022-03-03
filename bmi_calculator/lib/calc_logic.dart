@@ -27,9 +27,9 @@ class CalculatorLogic {
     if (_bmi >= 25) {
       return kOverweightResult;
     } else if (_bmi >= 18.5) {
-      return kUnderweightResult;
-    } else {
       return kNormalweightResult;
+    } else {
+      return kUnderweightResult;
     }
   }
 }
