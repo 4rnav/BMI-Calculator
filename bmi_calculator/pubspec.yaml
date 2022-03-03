@@ -82,7 +82,7 @@ flutter:
     - family: Poppins
       fonts:
         
-        - asset: fonts/Poppins-Bold.ttf
+        - asset: fonts/Poppins-SemiBold.ttf
           
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

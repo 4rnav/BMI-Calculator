@@ -1,13 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:bmi_calculator/calc_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
-import 'neuomorph_card.dart';
-import 'constants.dart';
+import '../components/bottom_button.dart';
+import '../components/neuomorph_card.dart';
+import '../constants.dart';
+import 'result_page.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
+import '../components/icon_content.dart';
 
-// Color maleCardColor = Color(0xFFEEEEEE);
-// Color femaleCardColor = Color(0xFFEEEEEE);
 
 enum Gender { male, female }
 
@@ -23,9 +26,9 @@ class _InputPageState extends State<InputPage> {
   static const inactiveColour = Color(0xFFEEEEEE);
 
   Gender? selectedGender;
-  int heightInput = kMinHeight;
-  int inputWeight = 30;
-  int inputAge = 10;
+  int heightInput = 150;
+  int inputWeight = 40;
+  int inputAge = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,7 @@ class _InputPageState extends State<InputPage> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Colors.grey.shade300,
       ),
       body: Column(
         children: <Widget>[
@@ -176,76 +179,69 @@ class _InputPageState extends State<InputPage> {
                     ),
                   ),
                 ),
-                Expanded(child: NeumorphCard(
+                Expanded(
+                    child: NeumorphCard(
                   cardColor: inactiveColour,
                   cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Age',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          inputAge.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    inputAge--;
-                                  });
-                                }),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.plus,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Age',
+                        style: kLabelTextStyle,
+                      ),
+                      Text(
+                        inputAge.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  inputAge++;
+                                  inputAge--;
                                 });
-                              },
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                              }),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPressed: () {
+                              setState(() {
+                                inputAge++;
+                              });
+                            },
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 )),
               ],
             ),
           ),
-          Container(
-            color: bottomBarColor,
-            margin: EdgeInsets.only(top: 10.0),
-            height: bottomBarHeight,
-          )
+          BottomButton(
+            onPress: () {
+              CalculatorLogic calc1 =
+                  CalculatorLogic(height: heightInput, weight: inputWeight);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc1.calculateBMI(),
+                    bmiInterpretation: calc1.getInterpretation(),
+                    bmiResultText: calc1.getResult().toUpperCase(),
+                  ),
+                ),
+              );
+            },
+            buttonLabel: 'CALCULATE',
+          ),
         ],
       ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({required this.icon, required this.onPressed});
-
-  final IconData icon;
-  final void Function() onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      elevation: 6.0,
-      onPressed: onPressed,
-      constraints: BoxConstraints.tightFor(
-        width: 50.0,
-        height: 50.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Colors.grey.shade200,
     );
   }
 }

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'constants.dart';
+import 'package:bmi_calculator/constants.dart';
 
 class IconContent extends StatelessWidget {
   IconContent({required this.icon, required this.label, required this.iconColor});
